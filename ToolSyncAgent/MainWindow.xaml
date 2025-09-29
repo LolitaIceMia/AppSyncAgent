@@ -3,20 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToolSyncAgent"
         mc:Ignorable="d"
-        Title="ApplicationAgent" Height="600" Width="800">
-    <Grid Margin="10">
+        Title="ToolSync Agent" Height="450" Width="800">
+
+    <DockPanel Margin="10">
+
+        <Button DockPanel.Dock="Bottom"
+                Content="添加一个新软件 (PowerToys)"
+                Margin="0,10,0,0"
+                Height="30"
+                FontSize="14"
+                FontWeight="Bold"
+                Command="{Binding AddPackageCommand}"/>
         <ListView ItemsSource="{Binding Packages}">
             <ListView.View>
                 <GridView>
-                    <!-- 定义列表的每一列 -->
-                    <!-- DisplayMemberBinding="{Binding Name}" 的意思是：这一列显示每个列表项的 Name 属性 -->
                     <GridViewColumn Header="软件名称" Width="200" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="当前版本" Width="150" DisplayMemberBinding="{Binding CurrentVersion}" />
                     <GridViewColumn Header="状态" Width="150" DisplayMemberBinding="{Binding Status}" />
-                    <GridViewColumn Header="更新/重载" Width="150" DisplayMemberBinding="{Binding Upload}" />
                 </GridView>
             </ListView.View>
         </ListView>
-    </Grid>
+
+    </DockPanel>
 </Window>
