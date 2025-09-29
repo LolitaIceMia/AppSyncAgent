@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolSyncAgent", "ToolSyncAgent\ToolSyncAgent.csproj", "{D251737A-2F7B-4FD8-A8A8-08F943232165}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationAgent", "ApplicationAgent\ApplicationAgent.csproj", "{D251737A-2F7B-4FD8-A8A8-08F943232165}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
