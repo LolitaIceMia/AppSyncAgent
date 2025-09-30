@@ -1,41 +1,63 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using ToolSyncAgent.Data;
+using ToolSyncAgent.Views;
 
 namespace ToolSyncAgent.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
-    public ObservableCollection<SoftwarePackage> Packages { get; set; }
+    public ObservableCollection<SoftwarePackage> Packages { get; } = new();
 
     public MainViewModel()
     {
-        // --- 从数据库加载数据 ---
-        using (var db = new AppDbContext())
-        {
-
-            var packagesFromDb = db.Packages.ToList();
-
-            // 4. 用从数据库加载的数据来初始化界面的 ObservableCollection
-            Packages = new ObservableCollection<SoftwarePackage>(packagesFromDb);
-        }
+        using var db = new AppDbContext();
+        foreach (var p in db.Packages.ToList())
+            Packages.Add(p);
     }
 
+    // 打开添加软件对话框
     [RelayCommand]
     private void AddPackage()
     {
-        var newPackage = new SoftwarePackage { Name = "PowerToys", CurrentVersion = "N/A", Status = "待安装" };
-        using (var db = new AppDbContext())
+        var win = new AddPackageWindow
         {
-            // 5. 将新创建的包添加到数据库上下文中
-            db.Packages.Add(newPackage);
+            Owner = Application.Current.MainWindow
+        };
 
-            // 6. 保存所有更改到数据库文件
+        var result = win.ShowDialog();
+        if (result != true)
+            return;
+
+        var vm = win.ViewModel;
+        var name = vm.PackageName?.Trim();
+        if (string.IsNullOrEmpty(name))
+            return;
+
+        var version = string.IsNullOrWhiteSpace(vm.PackageVersion)
+            ? "N/A"
+            : vm.PackageVersion!.Trim();
+
+        var newPkg = new SoftwarePackage
+        {
+            Name = name,
+            CurrentVersion = version,
+            Status = "待安装"
+        };
+
+        try
+        {
+            using var db = new AppDbContext();
+            db.Packages.Add(newPkg);
             db.SaveChanges();
+            Packages.Add(newPkg);
         }
-
-        // 7. 更新界面：将新包也添加到界面的集合中
-        Packages.Add(newPackage);
+        catch
+        {
+            // 生产中可加日志或消息提示
+        }
     }
 }
