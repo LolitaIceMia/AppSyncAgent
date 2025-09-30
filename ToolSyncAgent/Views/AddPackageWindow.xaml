@@ -21,7 +21,6 @@
             <Label Grid.Row="0" Grid.Column="0" Content="软件名称:" VerticalAlignment="Center"/>
             <TextBox Grid.Row="0" Grid.Column="1" Margin="5"
                      Text="{Binding PackageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
             <Label Grid.Row="1" Grid.Column="0" Content="版本:" VerticalAlignment="Center"/>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="5"
                      Text="{Binding PackageVersion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
