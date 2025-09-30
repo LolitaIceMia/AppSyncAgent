@@ -10,7 +10,7 @@ using ToolSyncAgent.Data;
 namespace ToolSyncAgent.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250929135147_InitialCreate")]
+    [Migration("20250930011745_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
