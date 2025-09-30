@@ -17,7 +17,7 @@
         <ListView ItemsSource="{Binding Packages}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="软件名称" Width="150" DisplayMemberBinding="{Binding MD5}" />
+                    <GridViewColumn Header="软件名称" Width="150" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="当前版本" Width="100" DisplayMemberBinding="{Binding CurrentVersion}" />
                     <GridViewColumn Header="状态" Width="100" DisplayMemberBinding="{Binding Status}" />
                     <GridViewColumn Header="最后更新时间" Width="200" DisplayMemberBinding="{Binding LastCheckedTime}" />

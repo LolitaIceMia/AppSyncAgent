@@ -1,14 +1,25 @@
-﻿namespace ToolSyncAgent;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-public class SoftwarePackage
+namespace ToolSyncAgent;
+
+public partial class SoftwarePackage : ObservableObject
 {
-    //数据库主键
+    // 数据库主键
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    [ObservableProperty]
+    private string name = string.Empty;
 
-    public string CurrentVersion { get; set; }
-    public string Status { get; set; }
-    public string DownloadUrl { get; set; }
-    public DateTime LastCheckedTime { get; set; }
+    [ObservableProperty]
+    private string currentVersion = string.Empty;
+
+    [ObservableProperty]
+    private string status = string.Empty;
+
+    [ObservableProperty]
+    private string downloadUrl = string.Empty;
+
+    [ObservableProperty]
+    private DateTime lastCheckedTime;
 }
